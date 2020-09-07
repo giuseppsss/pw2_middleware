@@ -36,29 +36,29 @@ def add_userCtfd():
 #get_solves(str(user_id))
 #add_userCtfd()
 
-#Funzione per convertire le stringhe in liste
-def split_str(s):
-    return list(s)
-
 #Funzione per controllare se la challenge esiste
 def check_challenges(name_challenge, category_challenge):
- #Da errore di tipo sul secondo if. Da risolvere se si vuole implementare nella funzione add_challenge
-
-    #Provavo a convertire in lista le variabili, ma da sempre errore
-    #name_challenge = split_str(name)
-    #category_challenge = split_str(category)
-    #print(name_challenge,category_challenge)
 
     result=get_challenges()
     if result['success'] == True:
         for challenge in result['data']: 
-            #print("Questo è l'indice" + i)
             if challenge['name'] == name_challenge and challenge['category'] == category_challenge:
                 return True
     return False
 
 
 #check_challenges("PrimaCh","Challenge1")
+
+#Funzione per verificare se la flag già esiste
+def check_flag(challenge_id, flag_content):
+    
+    result=get_allFlag()
+    if result['success'] == True:
+        for challenge in result['data']: 
+            #print("Questo è l'indice" + i)
+           if challenge['challenge_id'] == challenge_id and challenge['content'] == flag_content:
+                return True
+    return False
 
 #Funzione per aggiungere una flag
 def add_flag(challenge_id, flag_content):
@@ -74,8 +74,14 @@ def add_flag(challenge_id, flag_content):
     'Authorization': 'Token 8b01a36e2edca539b7d6c258d0b8211a4197784ffef2722fbc24b38c2f7cd2ae',
     'Content-Type': 'application/json'
     }  
-    response = requests.request("POST", url, headers=headers, data = json.dumps(payload))
-    print(response.text.encode('utf8'))
+
+    if check_flag(challenge_id, flag_content) == False:
+        response = requests.request("POST", url, headers=headers, data = json.dumps(payload))
+        print(response.text.encode('utf8'))
+        return True
+    else: return False
+
+#add_flag(1,"ciao1")
 
 #Funzione per aggiungere una nuova challenge 
 def add_challenge(name_challenge, value_challenge, category_challenge): 
