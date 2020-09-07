@@ -16,7 +16,7 @@ def add_userCtfd():
         "verified": True,
     }
     headers = {
-    'Authorization': 'Token af08dd99ce903fe13b593e1053c5b1f331b4dbfe2669c8d1a538143238e17bbd',
+    'Authorization': 'Token 8b01a36e2edca539b7d6c258d0b8211a4197784ffef2722fbc24b38c2f7cd2ae',
     'Content-Type': 'application/json'
     }  
     
@@ -51,9 +51,11 @@ def check_challenges(name_challenge, category_challenge):
 
     result=get_challenges()
     if result['success'] == True:
-        if result['data']['name'] == name_challenge and result['data']['category'] == category_challenge:
-            print("La challenge già esiste")
-        else: print("La challenge si può aggiungere")
+        for challenge in result['data']: 
+            #print("Questo è l'indice" + i)
+            if challenge['name'] == name_challenge and challenge['category'] == category_challenge:
+                return True
+    return False
 
 
 #check_challenges("PrimaCh","Challenge1")
@@ -69,7 +71,7 @@ def add_flag(challenge_id, flag_content):
     }
 
     headers = {
-    'Authorization': 'Token af08dd99ce903fe13b593e1053c5b1f331b4dbfe2669c8d1a538143238e17bbd',
+    'Authorization': 'Token 8b01a36e2edca539b7d6c258d0b8211a4197784ffef2722fbc24b38c2f7cd2ae',
     'Content-Type': 'application/json'
     }  
     response = requests.request("POST", url, headers=headers, data = json.dumps(payload))
@@ -89,26 +91,19 @@ def add_challenge(name_challenge, value_challenge, category_challenge):
     }
 
     headers = {
-    'Authorization': 'Token af08dd99ce903fe13b593e1053c5b1f331b4dbfe2669c8d1a538143238e17bbd',
+    'Authorization': 'Token 8b01a36e2edca539b7d6c258d0b8211a4197784ffef2722fbc24b38c2f7cd2ae',
     'Content-Type': 'application/json'
     }  
     
-    #check_challenges(name_challenge, category_challenge)
-    response = requests.request("POST", url, headers=headers, data = json.dumps(payload))
-    print(response.text.encode('utf8'))
-
-    #If per vedere se la challenge è stata aggiunta
-    result = json.loads(response.text)
-    print(result['success'])
-    if result['success'] == True:
+    if check_challenges(name_challenge, category_challenge) == False:
+        response = requests.request("POST", url, headers=headers, data = json.dumps(payload))
+        print(response.text.encode('utf8'))
+        result = json.loads(response.text)
+        #print(result['success'])
+        if result['success'] == True:
         #Salvare l'id della challenge
-        challenge_id = result['data']['id']
-        add_flag(challenge_id, "ciao5") 
-    #else commentato perchè non viene mai eseguito, anche se già c'è una challenge con lo stesso 
-    # nome, nella categoria e con la stessa flag viene aggiunta un'altra challenge con l'id successivo
-    #else : print("Challenge non aggiunta")
-    #SOLUZIONE:if prima di fare la POST per la challenge in cui si richiama check_challenges e si vede 
-    #          se quella challenge esiste già
+            challenge_id = result['data']['id']
+            add_flag(challenge_id, "ciao5") 
+    else: print("Challenge già esistente")
 
-
-#add_challenge()
+#add_challenge("SesttimoChallenge",16,"challenge3")
