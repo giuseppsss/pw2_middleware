@@ -59,4 +59,3 @@ def get_award(user_id):
     result = json.loads(response.text)
 
 #get_award()
-

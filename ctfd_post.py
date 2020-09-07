@@ -3,7 +3,6 @@ import json
 from ctfd_req import *
 from ctfd_adduser import get_password 
 
-
 #Funzione per aggiungere un utente su CTFD
 def add_userCtfd():
     
@@ -38,7 +37,7 @@ def add_userCtfd():
 
 #Funzione per controllare se la challenge esiste
 def check_challenges(name_challenge, category_challenge):
-
+    
     result=get_challenges()
     if result['success'] == True:
         for challenge in result['data']: 
@@ -91,7 +90,7 @@ def add_challenge(name_challenge, value_challenge, category_challenge):
         "value": value_challenge, #Aggiungere il valore della challenge 
         "category": category_challenge, #Aggiungere la categoria
         "type": "standard",
-        "state": "Visible", 
+        "state": "Visible",  #Modificare in "Hidden" nel caso si vogli aggiungere una challenge non visibile
     }
 
     headers = {
@@ -105,7 +104,7 @@ def add_challenge(name_challenge, value_challenge, category_challenge):
         result = json.loads(response.text)
         #print(result['success'])
         if result['success'] == True:
-        #Salvare l'id della challenge
+            #Salvare l'id della challenge
             challenge_id = result['data']['id']
             add_flag(challenge_id, "ciao5") 
     else: print("Challenge già esistente")
