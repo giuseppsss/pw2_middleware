@@ -46,7 +46,7 @@ def check_challenges(name_challenge, category_challenge):
                 return True
     return False
 
-#check_challenges("PrimaCh","Challenge1")
+check_challenges("PrimaCh","Challenge1")
 
 #Funzione per verificare se la flag già esiste
 def check_flag(challenge_id, flag_content):

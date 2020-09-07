@@ -15,7 +15,7 @@ def get_solves(user_id):
     response = requests.request("GET", url, headers=headers, data = payload)
     print(response.text.encode('utf8'))
 
-#get_solves(str(2))
+get_solves(str(2))
 
 #Funzione GET per tutte le flag associate alle challenge
 def get_allFlag():
