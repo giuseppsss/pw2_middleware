@@ -23,6 +23,9 @@ def get_allFlag():
 
     response = requests.request("GET", url, headers=headers, data = payload)
     print(response.text.encode('utf8'))
+    result = json.loads(response.text)
+
+    return result
 
 #Funzione GET per tutte le challenge
 def get_challenges():
@@ -36,11 +39,24 @@ def get_challenges():
 
 #get_challenges()
 
-def get_userStat():
-    url = "http://vpn.projectwork2.cyberhackademy.it:8000/api/v1/statistics/challenges/solves/percentages"
+#Funzione per la Scoreboard dei top 10 utenti
+def get_scoreboard():
+    url = "http://vpn.projectwork2.cyberhackademy.it:8000/api/v1/scoreboard"
 
     response = requests.request("GET", url, headers=headers, data = payload)
     print(response.text.encode('utf8'))
     result = json.loads(response.text)
 
-#get_userStat()
+#get_scoreboard()
+
+
+#Forse è quasi inutile
+def get_award(user_id):
+    url = "http://vpn.projectwork2.cyberhackademy.it:8000/api/v1/users​/"+user_id+"/awards"
+
+    response = requests.request("GET", url, headers=headers, data = payload)
+    print(response.text.encode('utf8'))
+    result = json.loads(response.text)
+
+#get_award()
+
