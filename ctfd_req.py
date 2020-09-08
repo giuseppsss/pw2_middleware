@@ -15,7 +15,7 @@ def get_solves(user_id):
     response = requests.request("GET", url, headers=headers, data = payload)
     print(response.text.encode('utf8'))
 
-get_solves(str(2))
+#get_solves(str(2))
 
 #Funzione GET per tutte le flag associate alle challenge
 def get_allFlag():
@@ -27,12 +27,14 @@ def get_allFlag():
 
     return result
 
+#get_allFlag()
+
 #Funzione GET per tutte le challenge
 def get_challenges():
     url = "http://vpn.projectwork2.cyberhackademy.it:8000/api/v1/challenges"
     
     response = requests.request("GET", url, headers=headers, data = payload)
-    print(response.text.encode('utf8'))
+    #print(response.text.encode('utf8'))
     result = json.loads(response.text)
 
     return result
@@ -57,5 +59,21 @@ def get_award(user_id):
     response = requests.request("GET", url, headers=headers, data = payload)
     print(response.text.encode('utf8'))
     result = json.loads(response.text)
+
+#Funzione per prendere l'id delle flag nelle challenge
+def get_idFlag(challenge_id):
+    url = "http://vpn.projectwork2.cyberhackademy.it:8000/api/v1/challenges/"+str(challenge_id)+"/flags"
+
+    response = requests.request("GET", url, headers=headers, data = payload)
+    #print(response.text.encode('utf8'))
+    result = json.loads(response.text)
+    if result['success'] == True:
+        #Dichiaro un arrai per salvare più flag
+        #flag_id=[]
+        for flag in result['data']:
+           #flag_id.append(flag['id'])
+           flag_id = flag['id']           
+           return flag_id
+    else: return False
 
 #get_award()

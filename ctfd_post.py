@@ -11,7 +11,7 @@ def add_userCtfd():
     payload = {
         "name": "utente24", #Aggiungere l'username della dashboard
         "password": get_password(),
-        "email": "utente24@prova.it", 
+        "email": "utente24@prova.it",
         "verified": True,
     }
     headers = {
@@ -42,10 +42,10 @@ def check_challenges(name_challenge, category_challenge):
     if result['success'] == True:
         for challenge in result['data']: 
             if challenge['name'] == name_challenge and challenge['category'] == category_challenge:
-                return True
+                return challenge['id']
     return False
 
-check_challenges("PrimaCh","Challenge1")
+#check_challenges("PrimaCh","Challenge1")
 
 #Funzione per verificare se la flag già esiste
 def check_flag(challenge_id, flag_content):
@@ -108,5 +108,38 @@ def add_challenge(name_challenge, value_challenge, category_challenge):
             challenge_id = result['data']['id']
             add_flag(challenge_id, "ciao5") 
     else: print("Challenge già esistente")
+
+#Funzione per patchare una flag
+def patch_flag(flag_patched, name_challenge, category_challenge):
+    
+    challenge_id=check_challenges(name_challenge,category_challenge)
+
+    flag_id = get_idFlag(challenge_id)
+
+    url = "http://vpn.projectwork2.cyberhackademy.it:8000/api/v1/flags/"+str(flag_id)+""
+    
+
+    payload = {
+        "challenge_id": challenge_id,
+        "type": "static",
+        "content": flag_patched,
+    }
+
+    headers = {
+        'Authorization': 'Token 8b01a36e2edca539b7d6c258d0b8211a4197784ffef2722fbc24b38c2f7cd2ae',
+        'Content-Type': 'application/json'
+    }
+
+    #Richiesta PATCH per modificare la flag
+    response = requests.request("PATCH", url, headers=headers, data = json.dumps(payload))
+    print(response.text.encode('utf8'))
+    #IF per verificare se è stata modificata
+    result = json.loads(response.text)
+    if result['success'] == True:
+        return True
+    else: return False
+    
+
+patch_flag("ciao2","SecondaChal","Challenge1")
 
 #add_challenge("SesttimoChallenge",16,"challenge3")
