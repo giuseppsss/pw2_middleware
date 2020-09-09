@@ -115,6 +115,7 @@ def patch_flag(flag_patched, name_challenge, category_challenge):
     challenge_id=check_challenges(name_challenge,category_challenge)
 
     flag_id = get_idFlag(challenge_id)
+    print(flag_id)
 
     url = "http://vpn.projectwork2.cyberhackademy.it:8000/api/v1/flags/"+str(flag_id)+""
     
@@ -140,6 +141,32 @@ def patch_flag(flag_patched, name_challenge, category_challenge):
     else: return False
     
 
-patch_flag("ciao2","SecondaChal","Challenge1")
+#patch_flag("ciao2","ProvaCh","Challenge1")
+
+def patch_challenge(challenge_id, patch_nameCh, patch_value, patch_categoryCh):
+    
+    url = "http://vpn.projectwork2.cyberhackademy.it:8000/api/v1/challenges/"+str(challenge_id)+""
+    
+
+    payload = {
+
+        "name": patch_nameCh,
+        "value": patch_value,
+        "category": patch_categoryCh,
+    }
+
+    headers = {
+        'Authorization': 'Token 8b01a36e2edca539b7d6c258d0b8211a4197784ffef2722fbc24b38c2f7cd2ae',
+        'Content-Type': 'application/json'
+    }
+
+    response = requests.request("PATCH", url, headers=headers, data = json.dumps(payload))
+    print(response.text.encode('utf8'))
+    result = json.loads(response.text)
+    if result['success'] == True:
+        return True
+    else: return False
+
+patch_challenge(2, "SecondaCh", 12, "Challenge1")
 
 #add_challenge("SesttimoChallenge",16,"challenge3")

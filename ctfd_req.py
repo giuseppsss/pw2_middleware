@@ -68,7 +68,7 @@ def get_idFlag(challenge_id):
     #print(response.text.encode('utf8'))
     result = json.loads(response.text)
     if result['success'] == True:
-        #Dichiaro un arrai per salvare più flag
+        #Dichiaro un array per salvare più flag
         #flag_id=[]
         for flag in result['data']:
            #flag_id.append(flag['id'])
