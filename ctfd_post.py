@@ -167,6 +167,67 @@ def patch_challenge(challenge_id, patch_nameCh, patch_value, patch_categoryCh):
         return True
     else: return False
 
-patch_challenge(2, "SecondaCh", 12, "Challenge1")
+#patch_challenge(2, "SecondaCh", 12, "Challenge1")
 
+#Funzione per aggiungere gli hint
+def add_hints(challenge_id, hint_content, cost_hint):
+    
+    url = "http://vpn.projectwork2.cyberhackademy.it:8000/api/v1/hints"
+
+    payload = {
+
+        "type": "standard",
+        "challenge_id": challenge_id,
+        "content": hint_content,
+        "cost": cost_hint,
+    }
+
+    headers = {
+        'Authorization': 'Token 8b01a36e2edca539b7d6c258d0b8211a4197784ffef2722fbc24b38c2f7cd2ae',
+        'Content-Type': 'application/json'
+    }
+
+    #If per verificare se esistente
+    if check_challengeHint(challenge_id,hint_content, cost_hint) == False:
+        response = requests.request("POST", url, headers=headers, data = json.dumps(payload))
+        #print(response.text.encode('utf8'))
+        result = json.loads(response.text)
+        if result['success'] == True:
+            hint_id = result['data']['id']
+            return True
+        else: return False
+
+#add_hints(1,"Questa è la seconda hint", 4)
+
+def patch_hint(hint_patched, cost_patched, name_challenge, category_challenge):
+    
+    challenge_id=check_challenges(name_challenge,category_challenge)
+
+    hint_id = get_idFlag(challenge_id)
+    print(hint_id)
+
+    url = "http://vpn.projectwork2.cyberhackademy.it:8000/api/v1/hints/"+str(hint_id)+""
+    
+    payload = {
+        "challenge_id": challenge_id,
+        "cost": cost_patched,
+        "type": "static",
+        "content": hint_patched,
+    }
+
+    headers = {
+        'Authorization': 'Token 8b01a36e2edca539b7d6c258d0b8211a4197784ffef2722fbc24b38c2f7cd2ae',
+        'Content-Type': 'application/json'
+    }
+
+    #Richiesta PATCH per modificare la flag
+    response = requests.request("PATCH", url, headers=headers, data = json.dumps(payload))
+    #print(response.text.encode('utf8'))
+    #IF per verificare se è stata modificata
+    result = json.loads(response.text)
+    if result['success'] == True:
+        return True
+    else: return False
+
+#patch_hint("Questa è la prima hint", 3, "PrimaChal", "Challenge1")
 #add_challenge("SesttimoChallenge",16,"challenge3")
