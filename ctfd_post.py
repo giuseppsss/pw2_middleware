@@ -3,10 +3,12 @@ import json
 from ctfd_req import *
 from ctfd_adduser import get_password 
 
+URL_CTFD = "http://ctfd.projectwork2.cyberhackademy.it"
+
 #Funzione per aggiungere un utente su CTFD
 def add_userCtfd():
     
-    url = "http://vpn.projectwork2.cyberhackademy.it:8000/api/v1/users"
+    url = ""+URL_CTFD+":8000/api/v1/users"
  
     payload = {
         "name": "utente24", #Aggiungere l'username della dashboard
@@ -59,7 +61,7 @@ def check_flag(challenge_id, flag_content):
 
 #Funzione per aggiungere una flag
 def add_flag(challenge_id, flag_content):
-    url = "http://vpn.projectwork2.cyberhackademy.it:8000/api/v1/flags"
+    url = ""+URL_CTFD+":8000/api/v1/flags"
 
     payload = {
         "challenge_id": challenge_id,
@@ -82,7 +84,7 @@ def add_flag(challenge_id, flag_content):
 
 #Funzione per aggiungere una nuova challenge 
 def add_challenge(name_challenge, value_challenge, category_challenge): 
-    url = "http://vpn.projectwork2.cyberhackademy.it:8000/api/v1/challenges"
+    url = ""+URL_CTFD+":8000/api/v1/challenges"
     
     payload = {
         "name": name_challenge, #Aggiungere il nome della challenge
@@ -117,7 +119,7 @@ def patch_flag(flag_patched, name_challenge, category_challenge):
     flag_id = get_idFlag(challenge_id)
     print(flag_id)
 
-    url = "http://vpn.projectwork2.cyberhackademy.it:8000/api/v1/flags/"+str(flag_id)+""
+    url = ""+URL_CTFD+":8000/api/v1/flags/"+str(flag_id)+""
     
 
     payload = {
@@ -145,7 +147,7 @@ def patch_flag(flag_patched, name_challenge, category_challenge):
 
 def patch_challenge(challenge_id, patch_nameCh, patch_value, patch_categoryCh):
     
-    url = "http://vpn.projectwork2.cyberhackademy.it:8000/api/v1/challenges/"+str(challenge_id)+""
+    url = ""+URL_CTFD+":8000/api/v1/challenges/"+str(challenge_id)+""
     
 
     payload = {
@@ -172,7 +174,7 @@ def patch_challenge(challenge_id, patch_nameCh, patch_value, patch_categoryCh):
 #Funzione per aggiungere gli hint
 def add_hints(challenge_id, hint_content, cost_hint):
     
-    url = "http://vpn.projectwork2.cyberhackademy.it:8000/api/v1/hints"
+    url = ""+URL_CTFD+":8000/api/v1/hints"
 
     payload = {
 
@@ -206,7 +208,7 @@ def patch_hint(hint_patched, cost_patched, name_challenge, category_challenge):
     hint_id = get_idFlag(challenge_id)
     print(hint_id)
 
-    url = "http://vpn.projectwork2.cyberhackademy.it:8000/api/v1/hints/"+str(hint_id)+""
+    url = ""+URL_CTFD+":8000/api/v1/hints/"+str(hint_id)+""
     
     payload = {
         "challenge_id": challenge_id,

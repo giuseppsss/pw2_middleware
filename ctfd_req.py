@@ -7,10 +7,12 @@ headers = {
 'Content-Type': 'application/json'
 }
 
+URL_CTFD = "http://ctfd.projectwork2.cyberhackademy.it"
+
 #Funzione GET per tutte le flag risolte da un'utente
 def get_solves(user_id):
 
-    url = "http://vpn.projectwork2.cyberhackademy.it:8000/api/v1/users/"+user_id+"/solves"
+    url = ""+URL_CTFD+":8000/api/v1/users/"+user_id+"/solves"
 
     response = requests.request("GET", url, headers=headers, data = payload)
     print(response.text.encode('utf8'))
@@ -19,7 +21,7 @@ def get_solves(user_id):
 
 #Funzione GET per tutte le flag associate alle challenge
 def get_allFlag():
-    url = "http://vpn.projectwork2.cyberhackademy.it:8000/api/v1/flags"
+    url = ""+URL_CTFD+":8000/api/v1/flags"
 
     response = requests.request("GET", url, headers=headers, data = payload)
     print(response.text.encode('utf8'))
@@ -31,7 +33,7 @@ def get_allFlag():
 
 #Funzione GET per tutte le challenge
 def get_challenges():
-    url = "http://vpn.projectwork2.cyberhackademy.it:8000/api/v1/challenges"
+    url = ""+URL_CTFD+":8000/api/v1/challenges"
     
     response = requests.request("GET", url, headers=headers, data = payload)
     #print(response.text.encode('utf8'))
@@ -43,7 +45,7 @@ def get_challenges():
 
 #Funzione per la Scoreboard dei top 10 utenti
 def get_scoreboard():
-    url = "http://vpn.projectwork2.cyberhackademy.it:8000/api/v1/scoreboard"
+    url = ""+URL_CTFD+":8000/api/v1/scoreboard"
 
     response = requests.request("GET", url, headers=headers, data = payload)
     print(response.text.encode('utf8'))
@@ -54,7 +56,7 @@ def get_scoreboard():
 
 #Forse è quasi inutile
 def get_award(user_id):
-    url = "http://vpn.projectwork2.cyberhackademy.it:8000/api/v1/users​/"+user_id+"/awards"
+    url = ""+URL_CTFD+":8000/api/v1/users​/"+user_id+"/awards"
 
     response = requests.request("GET", url, headers=headers, data = payload)
     print(response.text.encode('utf8'))
@@ -62,7 +64,7 @@ def get_award(user_id):
 
 #Funzione per prendere l'id delle flag nelle challenge
 def get_idFlag(challenge_id):
-    url = "http://vpn.projectwork2.cyberhackademy.it:8000/api/v1/challenges/"+str(challenge_id)+"/flags"
+    url = ""+URL_CTFD+":8000/api/v1/challenges/"+str(challenge_id)+"/flags"
 
     response = requests.request("GET", url, headers=headers, data = payload)
     #print(response.text.encode('utf8'))
@@ -78,7 +80,7 @@ def get_idFlag(challenge_id):
 
 #Funzione GET tutte le hint
 def get_hints():
-    url = "http://vpn.projectwork2.cyberhackademy.it:8000/api/v1/hints"
+    url = ""+URL_CTFD+":8000/api/v1/hints"
 
     response = requests.request("GET", url, headers=headers, data = payload)
     print(response.text.encode('utf8'))
@@ -86,7 +88,7 @@ def get_hints():
 
 #Funzione per vedere se la Hint esiste
 def check_challengeHint(challenge_id, hint_content, cost_hint):
-    url = "http://vpn.projectwork2.cyberhackademy.it:8000/api/v1/challenges/"+str(challenge_id)+"/hints"
+    url = ""+URL_CTFD+":8000/api/v1/challenges/"+str(challenge_id)+"/hints"
     
     response = requests.request("GET", url, headers=headers, data = payload)
     #print(response.text.encode('utf8'))
@@ -106,7 +108,7 @@ def check_challengeHint(challenge_id, hint_content, cost_hint):
 
 #Funzione per prenderesi l'id dell'Hint
 def get_idHint(challenge_id):
-    url = "http://vpn.projectwork2.cyberhackademy.it:8000/api/v1/challenges/"+str(challenge_id)+"/hints"
+    url = ""+URL_CTFD+":8000/api/v1/challenges/"+str(challenge_id)+"/hints"
 
     response = requests.request("GET", url, headers=headers, data = payload)
     #print(response.text.encode('utf8'))
