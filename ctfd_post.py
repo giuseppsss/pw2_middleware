@@ -17,7 +17,7 @@ def add_userCtfd():
         "verified": True,
     }
     headers = {
-    'Authorization': 'Token 8b01a36e2edca539b7d6c258d0b8211a4197784ffef2722fbc24b38c2f7cd2ae',
+    'Authorization': 'Token d901c4c649f2438eced8f185e5e784eeec813e793a4fefa7bea33551688dbe50',
     'Content-Type': 'application/json'
     }  
     
@@ -70,7 +70,7 @@ def add_flag(challenge_id, flag_content):
     }
 
     headers = {
-    'Authorization': 'Token 8b01a36e2edca539b7d6c258d0b8211a4197784ffef2722fbc24b38c2f7cd2ae',
+    'Authorization': 'Token d901c4c649f2438eced8f185e5e784eeec813e793a4fefa7bea33551688dbe50',
     'Content-Type': 'application/json'
     }  
 
@@ -96,7 +96,7 @@ def add_challenge(name_challenge, value_challenge, category_challenge):
     }
 
     headers = {
-    'Authorization': 'Token 8b01a36e2edca539b7d6c258d0b8211a4197784ffef2722fbc24b38c2f7cd2ae',
+    'Authorization': 'Token d901c4c649f2438eced8f185e5e784eeec813e793a4fefa7bea33551688dbe50',
     'Content-Type': 'application/json'
     }  
     
@@ -129,7 +129,7 @@ def patch_flag(flag_patched, name_challenge, category_challenge):
     }
 
     headers = {
-        'Authorization': 'Token 8b01a36e2edca539b7d6c258d0b8211a4197784ffef2722fbc24b38c2f7cd2ae',
+        'Authorization': 'Token d901c4c649f2438eced8f185e5e784eeec813e793a4fefa7bea33551688dbe50',
         'Content-Type': 'application/json'
     }
 
@@ -158,7 +158,7 @@ def patch_challenge(challenge_id, patch_nameCh, patch_value, patch_categoryCh):
     }
 
     headers = {
-        'Authorization': 'Token 8b01a36e2edca539b7d6c258d0b8211a4197784ffef2722fbc24b38c2f7cd2ae',
+        'Authorization': 'Token d901c4c649f2438eced8f185e5e784eeec813e793a4fefa7bea33551688dbe50',
         'Content-Type': 'application/json'
     }
 
@@ -185,7 +185,7 @@ def add_hints(challenge_id, hint_content, cost_hint):
     }
 
     headers = {
-        'Authorization': 'Token 8b01a36e2edca539b7d6c258d0b8211a4197784ffef2722fbc24b38c2f7cd2ae',
+        'Authorization': 'Token d901c4c649f2438eced8f185e5e784eeec813e793a4fefa7bea33551688dbe50',
         'Content-Type': 'application/json'
     }
 
@@ -218,7 +218,7 @@ def patch_hint(hint_patched, cost_patched, name_challenge, category_challenge):
     }
 
     headers = {
-        'Authorization': 'Token 8b01a36e2edca539b7d6c258d0b8211a4197784ffef2722fbc24b38c2f7cd2ae',
+        'Authorization': 'Token d901c4c649f2438eced8f185e5e784eeec813e793a4fefa7bea33551688dbe50',
         'Content-Type': 'application/json'
     }
 
