@@ -51,19 +51,21 @@ def get_scoreboard():
     url = ""+URL_CTFD+":8000/api/v1/scoreboard"
 
     response = requests.request("GET", url, headers=headers, data = payload)
-    print(response.text.encode('utf8'))
-    #result = json.loads(response.text)
+    #print(response.text.encode('utf8'))
+    result = json.loads(response.text)
+    return result
 
 #get_scoreboard()
 
 
 #Forse è quasi inutile
 def get_award(user_id):
-    url = ""+URL_CTFD+":8000/api/v1/users​/"+user_id+"/awards"
+    url = ""+URL_CTFD+":8000/api/v1/users​/"+str(user_id)+"/awards"
 
     response = requests.request("GET", url, headers=headers, data = payload)
     print(response.text.encode('utf8'))
     #result = json.loads(response.text)
+
 
 #Funzione per prendere l'id delle flag nelle challenge
 def get_idFlag(challenge_id):
@@ -127,15 +129,31 @@ def get_idHint(challenge_id):
 
 #get_solves(2)
 
-def get_score(user_id):
+def get_scoreChallenge(user_id):
     score_user = 0
 
     result = get_solves(user_id)
     if result['success'] == True:
         for challenge in result['data']:
-            score_user = score_user + int(challenge['challenge']['value'])
+            score_user += int(challenge['challenge']['value'])
         print(score_user)
     return score_user
 
-get_score(2)
+#get_score(4)
+#get_hints()
+
+def get_UserScore(user_id):
+    result=get_scoreboard()
+    score_user = 0
+    if result['success'] == True:
+        for user in result['data']:
+            if user['account_id'] == user_id:
+                score_user += int(user['score'])
+    return score_user
+
+#get_UserScore(4)
+#get_hintUSer(8)
+#get_UserId(4)
 #get_award()
+#get_scoreboard()
+#get_ScoreboardCount(12)
