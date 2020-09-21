@@ -3,7 +3,7 @@ import json
 
 payload = {}
 headers = {
-'Authorization': 'Token d901c4c649f2438eced8f185e5e784eeec813e793a4fefa7bea33551688dbe50',
+'Authorization': 'Token 8b01a36e2edca539b7d6c258d0b8211a4197784ffef2722fbc24b38c2f7cd2ae',
 'Content-Type': 'application/json'
 }
 
@@ -12,13 +12,10 @@ URL_CTFD = "http://ctfd.projectwork2.cyberhackademy.it"
 #Funzione GET per tutte le flag risolte da un'utente
 def get_solves(user_id):
 
-    url = ""+URL_CTFD+":8000/api/v1/users/"+str(user_id)+"/solves"
+    url = ""+URL_CTFD+":8000/api/v1/users/"+user_id+"/solves"
 
     response = requests.request("GET", url, headers=headers, data = payload)
-    #print(response.text.encode('utf8'))
-    result = json.loads(response.text)
-    
-    return result
+    print(response.text.encode('utf8'))
 
 #get_solves(str(2))
 
@@ -39,7 +36,7 @@ def get_challenges():
     url = ""+URL_CTFD+":8000/api/v1/challenges"
     
     response = requests.request("GET", url, headers=headers, data = payload)
-    print(response.text.encode('utf8'))
+    #print(response.text.encode('utf8'))
     result = json.loads(response.text)
 
     return result
@@ -52,7 +49,7 @@ def get_scoreboard():
 
     response = requests.request("GET", url, headers=headers, data = payload)
     print(response.text.encode('utf8'))
-    result = json.loads(response.text)
+    #result = json.loads(response.text)
 
 #get_scoreboard()
 
@@ -63,7 +60,7 @@ def get_award(user_id):
 
     response = requests.request("GET", url, headers=headers, data = payload)
     print(response.text.encode('utf8'))
-    result = json.loads(response.text)
+    #result = json.loads(response.text)
 
 #Funzione per prendere l'id delle flag nelle challenge
 def get_idFlag(challenge_id):
@@ -125,17 +122,5 @@ def get_idHint(challenge_id):
            return hint_id
     else: return False
 
-#get_solves(2)
 
-def get_score(user_id):
-    score_user = 0
-
-    result = get_solves(user_id)
-    if result['success'] == True:
-        for challenge in result['data']:
-            score_user = score_user + int(challenge['challenge']['value'])
-        print(score_user)
-    return score_user
-
-#get_score(5)
 #get_award()
